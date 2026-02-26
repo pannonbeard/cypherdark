@@ -1,0 +1,259 @@
+<form class="cypherdark editable" autocomplete="off">
+
+  {{!-- ── Header ── --}}
+  <header class="sheet-header">
+    <div class="header-top">
+      <img class="char-avatar" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
+      <div class="header-fields">
+        <input class="char-name" type="text" name="name" value="{{actor.name}}" />
+        <div class="char-subtitle">
+          {{~#if system.basic.descriptor~}}{{system.basic.descriptor}} {{~/if~}}
+          {{~#if system.basic.type~}}{{system.basic.type}}{{~/if~}}
+          {{~#if system.basic.focus}} who {{system.basic.focus}}{{/if~}}
+        </div>
+      </div>
+    </div>
+
+    <div class="header-meta">
+      <div class="meta-pill">
+        DESCRIPTOR
+        <input type="text" name="system.basic.descriptor" value="{{system.basic.descriptor}}" placeholder="—" style="width:100px;" />
+      </div>
+      <div class="meta-pill">
+        TYPE
+        <select name="system.basic.type">
+          <option value="">—</option>
+          {{#select system.basic.type}}
+            <option value="Protector">Protector</option>
+            <option value="Sage">Sage</option>
+            <option value="Explorer">Explorer</option>
+            <option value="Speaker">Speaker</option>
+          {{/select}}
+        </select>
+      </div>
+      <div class="meta-pill">
+        IDENTIFIER
+        <input type="text" name="system.basic.typeIdentifier" value="{{system.basic.typeIdentifier}}" placeholder="e.g. Root Worker" style="width:110px;" />
+      </div>
+      <div class="meta-pill">
+        FOCUS
+        <input type="text" name="system.basic.focus" value="{{system.basic.focus}}" placeholder="—" style="width:130px;" />
+      </div>
+    </div>
+  </header>
+
+  {{!-- ── Tabs ── --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="stats">Stats</a>
+    <a class="item" data-tab="skills">Skills</a>
+    <a class="item" data-tab="abilities">Abilities</a>
+    <a class="item" data-tab="cyphers">Cyphers</a>
+    <a class="item" data-tab="equipment">Equipment</a>
+    <a class="item" data-tab="notes">Notes</a>
+  </nav>
+
+  <section class="sheet-body">
+
+    {{!-- ── Stats ── --}}
+    <div class="tab" data-tab="stats" data-group="primary">
+
+      <div class="tier-row">
+        <span class="tier-label">✦ Tier</span>
+        <input type="number" name="system.basic.tier" value="{{system.basic.tier}}" min="1" max="6" />
+        <span class="tier-label" style="margin-left:12px;">Effort</span>
+        <input type="number" name="system.basic.effort" value="{{system.basic.effort}}" min="1" max="6" style="width:44px !important; color:var(--text) !important;" />
+      </div>
+
+      <div class="pools-grid">
+
+        <div class="pool-block might">
+          <div class="pool-label">Might</div>
+          <div class="pool-current">
+            <input type="number" name="system.pools.might.value" value="{{system.pools.might.value}}" min="0" max="{{system.pools.might.max}}" />
+          </div>
+          <div class="pool-meta">
+            <div class="pool-meta-field">
+              <span>Max</span>
+              <input type="number" name="system.pools.might.max" value="{{system.pools.might.max}}" min="1" />
+            </div>
+            <div class="pool-meta-field">
+              <span>Edge</span>
+              <input type="number" name="system.pools.mightEdge" value="{{system.pools.mightEdge}}" min="0" max="6" />
+            </div>
+          </div>
+        </div>
+
+        <div class="pool-block speed">
+          <div class="pool-label">Speed</div>
+          <div class="pool-current">
+            <input type="number" name="system.pools.speed.value" value="{{system.pools.speed.value}}" min="0" max="{{system.pools.speed.max}}" />
+          </div>
+          <div class="pool-meta">
+            <div class="pool-meta-field">
+              <span>Max</span>
+              <input type="number" name="system.pools.speed.max" value="{{system.pools.speed.max}}" min="1" />
+            </div>
+            <div class="pool-meta-field">
+              <span>Edge</span>
+              <input type="number" name="system.pools.speedEdge" value="{{system.pools.speedEdge}}" min="0" max="6" />
+            </div>
+          </div>
+        </div>
+
+        <div class="pool-block intel">
+          <div class="pool-label">Intellect</div>
+          <div class="pool-current">
+            <input type="number" name="system.pools.intellect.value" value="{{system.pools.intellect.value}}" min="0" max="{{system.pools.intellect.max}}" />
+          </div>
+          <div class="pool-meta">
+            <div class="pool-meta-field">
+              <span>Max</span>
+              <input type="number" name="system.pools.intellect.max" value="{{system.pools.intellect.max}}" min="1" />
+            </div>
+            <div class="pool-meta-field">
+              <span>Edge</span>
+              <input type="number" name="system.pools.intellectEdge" value="{{system.pools.intellectEdge}}" min="0" max="6" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-title">Experience Points</div>
+      <div class="xp-section">
+        <div class="xp-track" id="xp-track-{{actor.id}}">
+          {{#times 12 xpValue=system.basic.xp}}
+            <div class="xp-pip {{#if (lte @index (sub ../system.basic.xp 1))}}filled{{/if}}"
+              data-pip="{{@index}}"
+              data-actor="{{../actor.id}}">
+            </div>
+          {{/times}}
+        </div>
+        <span style="font-size:13px; color:var(--text-dim);">
+          <input type="number" name="system.basic.xp" value="{{system.basic.xp}}" min="0" max="12"
+            style="width:36px !important; display:inline !important;" />
+          / 12 XP
+        </span>
+      </div>
+
+      <div class="section-title">Recovery Rolls</div>
+      <div class="recovery-list">
+        <label class="recovery-item {{#if system.recoveries.action}}used{{/if}}">
+          <input type="checkbox" name="system.recoveries.action" {{#if system.recoveries.action}}checked{{/if}} />
+          1 Action
+        </label>
+        <label class="recovery-item {{#if system.recoveries.tenMinutes}}used{{/if}}">
+          <input type="checkbox" name="system.recoveries.tenMinutes" {{#if system.recoveries.tenMinutes}}checked{{/if}} />
+          10 Minutes
+        </label>
+        <label class="recovery-item {{#if system.recoveries.oneHour}}used{{/if}}">
+          <input type="checkbox" name="system.recoveries.oneHour" {{#if system.recoveries.oneHour}}checked{{/if}} />
+          1 Hour
+        </label>
+        <label class="recovery-item {{#if system.recoveries.tenHours}}used{{/if}}">
+          <input type="checkbox" name="system.recoveries.tenHours" {{#if system.recoveries.tenHours}}checked{{/if}} />
+          10 Hours
+        </label>
+      </div>
+
+      <div class="status-row">
+        <div class="status-badge {{#if system.damage.impaired}}active{{/if}}"
+          data-status="impaired" data-actor="{{actor.id}}">Impaired</div>
+        <div class="status-badge {{#if system.damage.debilitated}}active{{/if}}"
+          data-status="debilitated" data-actor="{{actor.id}}">Debilitated</div>
+        <div class="status-badge {{#if system.damage.dead}}active{{/if}}"
+          data-status="dead" data-actor="{{actor.id}}">Dead</div>
+      </div>
+
+    </div>
+
+    {{!-- ── Skills ── --}}
+    <div class="tab" data-tab="skills" data-group="primary">
+      <div class="skills-legend">
+        <span class="inability">✕ Inability</span>
+        <span>● Trained</span>
+        <span>●● Specialized</span>
+      </div>
+      {{#each items}}
+        {{#if (eq type "skill")}}
+        <div class="skill-row {{#if system.skillLevel}}{{#if (eq system.skillLevel "Inability")}}inability{{/if}}{{/if}}">
+          <span class="skill-name" style="flex:1;">{{name}}</span>
+          <span class="skill-level-badge">
+            {{#if (eq system.skillLevel "Inability")}}Inability
+            {{else if (eq system.skillLevel "Specialized")}}Specialized
+            {{else if (eq system.skillLevel "Trained")}}Trained
+            {{else}}Unskilled{{/if}}
+          </span>
+        </div>
+        {{/if}}
+      {{/each}}
+    </div>
+
+    {{!-- ── Abilities ── --}}
+    <div class="tab" data-tab="abilities" data-group="primary">
+      {{#each items}}
+        {{#if (eq type "ability")}}
+        <div class="ability-item">
+          <div class="ability-header">
+            <div class="ability-name">{{name}}</div>
+            {{#if system.costPoints}}
+            <div class="ability-cost">{{system.costPoints}} {{system.costPool}}</div>
+            {{/if}}
+          </div>
+          <div class="ability-desc">{{system.description}}</div>
+        </div>
+        {{/if}}
+      {{/each}}
+    </div>
+
+    {{!-- ── Cyphers ── --}}
+    <div class="tab" data-tab="cyphers" data-group="primary">
+      <div class="cypher-limit-bar {{#if (gt cypherCount system.basic.cypherLimit)}}over{{/if}}">
+        <span>Cypher Limit</span>
+        <input type="number" name="system.basic.cypherLimit" value="{{system.basic.cypherLimit}}"
+          min="1" max="10" style="width:40px !important; background:transparent !important; border:none !important; color:inherit !important; font-family:var(--font-display) !important; font-size:16px !important;" />
+        <span class="count">{{cypherCount}} / {{system.basic.cypherLimit}} carried</span>
+      </div>
+      {{#each items}}
+        {{#if (eq type "cypher")}}
+        <div class="ability-item">
+          <div class="ability-header">
+            <div class="ability-name">{{name}}</div>
+            {{#if system.level}}
+            <div class="ability-cost">Level {{system.level}}</div>
+            {{/if}}
+          </div>
+          {{#if system.identified}}
+            <div class="ability-desc">{{system.description}}</div>
+          {{else}}
+            <div class="ability-desc" style="font-style:italic; opacity:0.5;">Unidentified</div>
+          {{/if}}
+        </div>
+        {{/if}}
+      {{/each}}
+    </div>
+
+    {{!-- ── Equipment ── --}}
+    <div class="tab" data-tab="equipment" data-group="primary">
+      <div class="section-title">Carried Gear</div>
+      {{#each items}}
+        {{#if (eq type "equipment")}}
+        <div class="equipment-row">
+          <span class="eq-name">{{name}}</span>
+          {{#if system.quantity}}
+          <span class="eq-qty">×{{system.quantity}}</span>
+          {{/if}}
+        </div>
+        {{/if}}
+      {{/each}}
+    </div>
+
+    {{!-- ── Notes ── --}}
+    <div class="tab" data-tab="notes" data-group="primary">
+      <div class="section-title">Character Notes</div>
+      <textarea class="notes-area" name="system.basic.notes">{{system.basic.notes}}</textarea>
+    </div>
+
+  </section>
+
+</form>

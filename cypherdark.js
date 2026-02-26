@@ -37,7 +37,7 @@ Hooks.once("ready", () => {
 
   // ── Find base sheet class ──────────────────────────────────────────────
   const baseClass = Object.values(CONFIG.Actor.sheetClasses?.pc ?? {})
-    .find(s => s.id.startsWith("cyphersystem"))?.cls;
+    .find(s => s.id.startsWith("cypher"))?.cls;
 
   if (!baseClass) {
     console.error("CypherDark | Could not find the Cypher System PC sheet class.");

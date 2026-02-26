@@ -1,3 +1,38 @@
+Hooks.once("init", () => {
+  Handlebars.registerHelper("times", function(n, options) {
+    let result = "";
+    for (let i = 0; i < n; i++) {
+      result += options.fn({ ...options.hash, index: i });
+    }
+    return result;
+  });
+
+  Handlebars.registerHelper("sub", function(a, b) {
+    return a - b;
+  });
+
+  Handlebars.registerHelper("lte", function(a, b) {
+    return a <= b;
+  });
+
+  Handlebars.registerHelper("gt", function(a, b) {
+    return a > b;
+  });
+
+  Handlebars.registerHelper("gte", function(a, b) {
+    return a >= b;
+  });
+
+  Handlebars.registerHelper("eq", function(a, b) {
+    return a === b;
+  });
+
+  Handlebars.registerHelper("neq", function(a, b) {
+    return a !== b;
+  });
+})
+
+
 Hooks.once("ready", () => {
 
   // ── Extend the Cypher System's PC sheet ─────────────────────────────────

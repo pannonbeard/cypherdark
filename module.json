@@ -2,15 +2,16 @@
   "id": "cypherdark",
   "title": "Cypher Dark — OGoA Sheet",
   "description": "Dark-themed character sheet for the Cypher System, styled for Old Gods of Appalachia.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "compatibility": {
-    "minimum": "13"
+    "minimum": "13",
+    "verified": "13.351"
   },
   "authors": [{ "name": "Panonbeard" }],
   "esmodules": ["cypherdark.js"],
   "styles": ["cypherdark.css"],
-  "manifest": "https://github.com/pannonbeard/cypherdark/releases/latest/download/module.json",
-  "download": "https://github.com/pannonbeard/cypherdark/releases/latest/download/cypherdark.zip",
+  "manifest": "https://raw.githubusercontent.com/pannonbeard/cypherdark/refs/heads/main/module.json",
+  "download": "https://github.com/pannonbeard/cypherdark/archive/refs/heads/main.zip",
   "dependencies": [
     { "id": "cyphersystem", "type": "system" }
   ]

@@ -121,11 +121,10 @@
 
       <div class="section-title">Experience Points</div>
       <div class="xp-section">
-        <div class="xp-track" id="xp-track-{{actor.id}}">
-          {{#times 12 xpValue=system.basic.xp}}
-            <div class="xp-pip {{#if (lte @index (sub ../system.basic.xp 1))}}filled{{/if}}"
-              data-pip="{{@index}}"
-              data-actor="{{../actor.id}}">
+        <div class="xp-track">
+          {{#times 12}}
+            <div class="xp-pip {{#if (lte index (sub ../system.basic.xp 1))}}filled{{/if}}"
+              data-pip="{{index}}">
             </div>
           {{/times}}
         </div>

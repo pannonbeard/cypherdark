@@ -72,7 +72,7 @@ Hooks.once("ready", () => {
 
     activateListeners(html) {
       super.activateListeners(html);
-      if (!this.isEditable) return;
+      // if (!this.isEditable) return;
 
       // XP pip clicks
       html.find(".xp-pip").click(ev => {

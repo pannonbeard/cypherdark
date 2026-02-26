@@ -2,7 +2,7 @@
   "id": "cypherdark",
   "title": "Cypher Dark — OGoA Sheet",
   "description": "Dark-themed character sheet for the Cypher System, styled for Old Gods of Appalachia.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "compatibility": {
     "minimum": "13",
     "verified": "13.351"

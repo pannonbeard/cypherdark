@@ -4,8 +4,7 @@
   "description": "Dark-themed character sheet for the Cypher System, styled for Old Gods of Appalachia.",
   "version": "1.0.2",
   "compatibility": {
-    "minimum": "11",
-    "verified": "12"
+    "minimum": "13"
   },
   "authors": [{ "name": "Panonbeard" }],
   "esmodules": ["cypherdark.js"],

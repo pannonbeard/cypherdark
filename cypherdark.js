@@ -1,4 +1,4 @@
-Hooks.once("init", () => {
+Hooks.once("ready", () => {
 
   // ── Extend the Cypher System's PC sheet ─────────────────────────────────
   // We grab whatever sheet class the system registered for PCs and extend it

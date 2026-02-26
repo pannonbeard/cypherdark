@@ -4,7 +4,7 @@ Hooks.once("init", () => {
   // We grab whatever sheet class the system registered for PCs and extend it
   // so we inherit all its save/submit/item-drag logic for free
   const baseClass = Object.values(CONFIG.Actor.sheetClasses?.pc ?? {})
-    .find(s => s.id.startsWith("cyphersystem"))?.cls;
+    .find(s => s.id.startsWith("cypher"))?.cls;
 
   if (!baseClass) {
     console.error("CypherDark | Could not find the Cypher System PC sheet class. Is the system active?");

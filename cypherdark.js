@@ -90,6 +90,23 @@ Hooks.once("ready", () => {
         const newState = current === state ? "Hale" : state;
         this.actor.update({ "system.combat.damageTrack.state": newState });
       });
+
+      html.find("input, select, textarea").on("change", ev => {
+        const el = ev.currentTarget;
+        const field = el.name;
+        if (!field) return; // skip elements with no name attribute
+
+        let value;
+        if (el.type === "checkbox") {
+          value = el.checked;
+        } else if (el.type === "number") {
+          value = el.value === "" ? null : Number(el.value);
+        } else {
+          value = el.value;
+        }
+
+        this.actor.update({ [field]: value });
+      });
     }
 
     async _updateObject(event, formData) {

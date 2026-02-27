@@ -46,6 +46,12 @@ Hooks.once("setup", async () => {
     "tab-cyphers",
     "tab-equipment",
     "tab-notes",
+    "item-skill",
+    "item-ability",
+    "item-cypher",
+    "item-equipment",
+    "item-attack",
+    "item-generic",
   ];
 
   for (const name of partialNames) {
@@ -166,28 +172,24 @@ Hooks.once("ready", () => {
       });
 
       // ── Skill: Cycle level ─────────────────────────────────────────────────
-      // Trained → Specialized → Unskilled → Trained
+      // Skill: Cycle — Practiced → Trained → Specialized → Practiced
       html.find(".skill-cycle").click(async ev => {
         const id = ev.currentTarget.dataset.itemId;
         const item = this.actor.items.get(id);
         if (!item) return;
-
-        const levels = ["Unskilled", "Trained", "Specialized"];
-        const current = item.system.skillLevel ?? "Trained";
+        const levels = ["Practiced", "Trained", "Specialized"];
+        const current = item.system.basic.rating ?? "Practiced";
         const next = levels[(levels.indexOf(current) + 1) % levels.length];
-        await item.update({ "system.skillLevel": next });
+        await item.update({ "system.basic.rating": next });
       });
 
-      // ── Skill: Toggle inability ────────────────────────────────────────────
+      // Skill: Toggle inability
       html.find(".skill-inability").click(async ev => {
         const id = ev.currentTarget.dataset.itemId;
         const item = this.actor.items.get(id);
         if (!item) return;
-
-        const isInability = item.system.skillLevel === "Inability";
-        await item.update({
-          "system.skillLevel": isInability ? "Trained" : "Inability"
-        });
+        const isInability = item.system.basic.rating === "Inability";
+        await item.update({ "system.basic.rating": isInability ? "Practiced" : "Inability" });
       });
 
       // ── Skill: Delete ──────────────────────────────────────────────────────
@@ -224,8 +226,10 @@ Hooks.once("ready", () => {
           name,
           type: "ability",
           system: {
-            costPoints:  cost ? Number(cost) : 0,
-            costPool:    pool ?? "",
+            basic: {
+              cost: cost ?? "0",
+              pool: pool ?? "Pool",
+            },
             description: desc,
           }
         }]);
@@ -398,5 +402,78 @@ Hooks.once("ready", () => {
   });
 
   // Actors.unregisterSheet("cyphersystem", baseClass, { types: ["pc"] });
+
+  // ── Base item sheet class ──────────────────────────────────────────────
+  const baseItemClass = Object.values(CONFIG.Item.sheetClasses?.base ?? {})
+    .find(s => s.id.startsWith("cypher"))?.cls
+    ?? foundry.applications.sheets.ItemSheet;
+
+  class CypherDarkItemSheet extends baseItemClass {
+
+    static get defaultOptions() {
+      return foundry.utils.mergeObject(super.defaultOptions, {
+        classes: ["cypherdark", "cypherdark-item"],
+        template: "modules/cypherdark/templates/item-sheet.hbs",
+        width: 520,
+        height: 480,
+        resizable: true,
+      });
+    }
+
+    async getData() {
+      const context = await super.getData();
+      context.itemType = this.item.type;
+      return context;
+    }
+
+    activateListeners(html) {
+      super.activateListeners(html);
+      if (!this.isEditable) return;
+
+      // Live sync all inputs
+      html.find("input, select, textarea").on("change", ev => {
+        const el = ev.currentTarget;
+        const field = el.name;
+        if (!field) return;
+
+        let value;
+        if (el.type === "checkbox")    value = el.checked;
+        else if (el.type === "number") value = el.value === "" ? null : Number(el.value);
+        else                           value = el.value;
+
+        this.item.update({ [field]: value });
+      });
+    }
+
+    async _updateObject(event, formData) {
+      const expanded = foundry.utils.expandObject(formData);
+      return this.item.update(expanded);
+    }
+  }
+
+  // Register for all item types
+  const itemTypes = [
+    "ability", "ammo", "armor", "artifact", "attack",
+    "cypher", "equipment", "lasting-damage", "material",
+    "oddity", "power-shift", "recursion", "skill", "tag"
+  ];
+
+  Items.registerSheet("cypherdark", CypherDarkItemSheet, {
+    types: itemTypes,
+    makeDefault: true,
+    label: "Cypher Dark Item Sheet"
+  });
+
+  // // Unregister the system's default item sheet
+  // const baseItemSheets = Object.values(CONFIG.Item.sheetClasses?.base ?? {})
+  //   .filter(s => s.id.startsWith("cyphersystem"));
+
+  // for (const sheet of baseItemSheets) {
+  //   for (const type of itemTypes) {
+  //     try {
+  //       Items.unregisterSheet("cyphersystem", sheet.cls, { types: [type] });
+  //     } catch(e) { /* some types may not have been registered */ }
+  //   }
+  // }
 
 });

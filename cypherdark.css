@@ -769,3 +769,152 @@
   background: rgba(201,162,39,0.1);
   border-color: var(--gold);
 }
+
+/* ── Item sheet ── */
+.cypherdark-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+.cypherdark-item .item-sheet-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--deep);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cypherdark-item .item-sheet-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.cypherdark-item .item-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cypherdark-item .item-header-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cypherdark-item .item-name-input {
+  font-family: var(--font-display) !important;
+  font-size: 20px !important;
+  color: var(--gold) !important;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 2px 0 !important;
+  width: 100%;
+  outline: none;
+}
+
+.cypherdark-item .item-type-badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2px 10px;
+  align-self: flex-start;
+}
+
+.cypherdark-item .item-sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: var(--surface);
+}
+
+/* ── Item form layout ── */
+.cypherdark-item .item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cypherdark-item .item-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cypherdark-item .item-field-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.cypherdark-item .item-field-row .item-field {
+  flex: 1;
+}
+
+.cypherdark-item .item-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 14px;
+  color: var(--text-dim);
+  cursor: pointer;
+  height: 34px;
+}
+
+.cypherdark-item .item-checkbox-row input[type="checkbox"] {
+  width: 14px !important;
+  height: 14px !important;
+  accent-color: var(--gold);
+  border: none !important;
+  background: none !important;
+  padding: 0 !important;
+  flex-shrink: 0;
+}
+
+/* ── Rich text editor area ── */
+.cypherdark-item .item-editor {
+  background: var(--deep);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 10px 12px;
+  min-height: 120px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  cursor: text;
+}
+
+.cypherdark-item .item-editor:focus-within {
+  border-color: var(--gold-dim);
+}
+
+.cypherdark-item .item-editor p { margin: 0 0 6px; }
+.cypherdark-item .item-editor strong { color: var(--gold); }
+.cypherdark-item .item-editor em { color: var(--text-dim); }

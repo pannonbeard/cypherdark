@@ -1,0 +1,27 @@
+<div class="item-form">
+
+  <div class="item-field-row">
+    <div class="item-field" style="flex:1;">
+      <label>Cost</label>
+      <input type="text" name="system.basic.cost" value="{{system.basic.cost}}"
+        placeholder="e.g. 2, 2+, 0" />
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Pool</label>
+      <select name="system.basic.pool">
+        <option value="Pool" {{#if (eq system.basic.pool "Pool")}}selected{{/if}}>— None —</option>
+        <option value="Might" {{#if (eq system.basic.pool "Might")}}selected{{/if}}>Might</option>
+        <option value="Speed" {{#if (eq system.basic.pool "Speed")}}selected{{/if}}>Speed</option>
+        <option value="Intellect" {{#if (eq system.basic.pool "Intellect")}}selected{{/if}}>Intellect</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="item-field">
+    <label>Description</label>
+    <div class="item-editor" data-edit="system.description">
+      {{{system.description}}}
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,31 @@
+<div class="item-form">
+
+  <div class="item-field-row">
+    <div class="item-field" style="flex:1;">
+      <label>Quantity</label>
+      <input type="number" name="system.basic.quantity"
+        value="{{system.basic.quantity}}" min="0" />
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Level</label>
+      <input type="number" name="system.basic.level"
+        value="{{system.basic.level}}" min="0" placeholder="—" />
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Favorite</label>
+      <div class="item-checkbox-row">
+        <input type="checkbox" name="system.favorite"
+          {{#if system.favorite}}checked{{/if}} />
+        <span>Mark as Favorite</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-field">
+    <label>Description</label>
+    <div class="item-editor" data-edit="system.description">
+      {{{system.description}}}
+    </div>
+  </div>
+
+</div>

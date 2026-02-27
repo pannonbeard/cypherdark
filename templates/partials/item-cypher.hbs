@@ -1,0 +1,32 @@
+<div class="item-form">
+
+  <div class="item-field-row">
+    <div class="item-field" style="flex:1;">
+      <label>Level</label>
+      <input type="text" name="system.basic.level" value="{{system.basic.level}}"
+        placeholder="e.g. 4, 1d6+2" />
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Identified</label>
+      <div class="item-checkbox-row">
+        <input type="checkbox" name="system.basic.identified"
+          {{#if system.basic.identified}}checked{{/if}} />
+        <span>Identified</span>
+      </div>
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Unidentified Name</label>
+      <input type="text" name="system.settings.general.nameUnidentified"
+        value="{{system.settings.general.nameUnidentified}}"
+        placeholder="Mysterious object..." />
+    </div>
+  </div>
+
+  <div class="item-field">
+    <label>Description / Effect</label>
+    <div class="item-editor" data-edit="system.description">
+      {{{system.description}}}
+    </div>
+  </div>
+
+</div>

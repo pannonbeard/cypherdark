@@ -1,0 +1,22 @@
+<form class="cypherdark cypherdark-item editable" autocomplete="off">
+
+  {{!-- Shared item header --}}
+  <header class="item-sheet-header">
+    <img class="item-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="item-header-fields">
+      <input class="item-name-input" type="text" name="name" value="{{item.name}}" />
+      <div class="item-type-badge">{{itemType}}</div>
+    </div>
+  </header>
+
+  <div class="item-sheet-body">
+    {{#if (eq itemType "skill")}}      {{> cypherdark-item-skill}}
+    {{else if (eq itemType "ability")}} {{> cypherdark-item-ability}}
+    {{else if (eq itemType "cypher")}}  {{> cypherdark-item-cypher}}
+    {{else if (eq itemType "equipment")}} {{> cypherdark-item-equipment}}
+    {{else if (eq itemType "attack")}}  {{> cypherdark-item-attack}}
+    {{else}}                            {{> cypherdark-item-generic}}
+    {{/if}}
+  </div>
+
+</form>

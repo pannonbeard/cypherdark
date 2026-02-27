@@ -1,0 +1,67 @@
+<div class="item-form">
+
+  <div class="item-field-row">
+    <div class="item-field" style="flex:1;">
+      <label>Weapon Type</label>
+      <select name="system.basic.type">
+        {{#select system.basic.type}}
+          <option value="light weapon">Light</option>
+          <option value="medium weapon">Medium</option>
+          <option value="heavy weapon">Heavy</option>
+        {{/select}}
+      </select>
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Damage</label>
+      <input type="number" name="system.basic.damage"
+        value="{{system.basic.damage}}" min="0" />
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Range</label>
+      <input type="text" name="system.basic.range"
+        value="{{system.basic.range}}" placeholder="e.g. Short, Long" />
+    </div>
+  </div>
+
+  <div class="item-field-row">
+    <div class="item-field" style="flex:1;">
+      <label>Skill Rating</label>
+      <select name="system.basic.skillRating">
+        {{#select system.basic.skillRating}}
+          <option value="Inability">Inability</option>
+          <option value="Practiced">Practiced</option>
+          <option value="Trained">Trained</option>
+          <option value="Specialized">Specialized</option>
+        {{/select}}
+      </select>
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Modifier</label>
+      <select name="system.basic.modifier">
+        {{#select system.basic.modifier}}
+          <option value="eased">Eased</option>
+          <option value="hindered">Hindered</option>
+        {{/select}}
+      </select>
+    </div>
+    <div class="item-field" style="flex:1;">
+      <label>Steps</label>
+      <input type="number" name="system.basic.steps"
+        value="{{system.basic.steps}}" min="0" />
+    </div>
+  </div>
+
+  <div class="item-field">
+    <label>Notes</label>
+    <input type="text" name="system.basic.notes"
+      value="{{system.basic.notes}}" placeholder="Additional notes..." />
+  </div>
+
+  <div class="item-field">
+    <label>Description</label>
+    <div class="item-editor" data-edit="system.description">
+      {{{system.description}}}
+    </div>
+  </div>
+
+</div>

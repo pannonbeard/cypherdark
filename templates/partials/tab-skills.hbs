@@ -8,12 +8,12 @@
 
   {{#each items}}
     {{#if (eq type "skill")}}
-    <div class="skill-row {{#if (eq system.skillLevel 'Inability')}}inability{{/if}}" data-item-id="{{id}}">
+    <div class="skill-row {{#if (eq system.basic.rating 'Inability')}}inability{{/if}}" data-item-id="{{id}}">
       <span class="skill-name" style="flex:1;">{{name}}</span>
       <span class="skill-level-badge">
-        {{#if (eq system.skillLevel "Inability")}}Inability
-        {{else if (eq system.skillLevel "Specialized")}}Specialized
-        {{else if (eq system.skillLevel "Trained")}}Trained
+        {{#if (eq system.basic.rating "Inability")}}Inability
+        {{else if (eq system.basic.rating "Specialized")}}Specialized
+        {{else if (eq system.basic.rating "Trained")}}Trained
         {{else}}Unskilled{{/if}}
       </span>
       <div class="skill-controls">

@@ -1,0 +1,32 @@
+<div class="item-form">
+
+  <div class="item-field-row">
+    <div class="item-field">
+      <label>Skill Rating</label>
+      <select name="system.basic.rating">
+        {{#select system.basic.rating}}
+          <option value="Inability">Inability</option>
+          <option value="Practiced">Practiced</option>
+          <option value="Trained">Trained</option>
+          <option value="Specialized">Specialized</option>
+        {{/select}}
+      </select>
+    </div>
+    <div class="item-field">
+      <label>Initiative Skill</label>
+      <div class="item-checkbox-row">
+        <input type="checkbox" name="system.settings.general.initiative"
+          {{#if system.settings.general.initiative}}checked{{/if}} />
+        <span>Use for Initiative</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-field">
+    <label>Description</label>
+    <div class="item-editor" data-edit="system.description">
+      {{{system.description}}}
+    </div>
+  </div>
+
+</div>

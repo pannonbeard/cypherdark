@@ -1,0 +1,67 @@
+{{!-- ── Cyphers ── --}}
+    <div class="tab" data-tab="cyphers" data-group="primary">
+
+      <div class="cypher-limit-bar {{#if (gt cypherCount system.equipment.cypherLimit)}}over{{/if}}">
+        <span>Cypher Limit</span>
+        <input type="number" name="system.equipment.cypherLimit"
+          value="{{system.equipment.cypherLimit}}" min="1" max="10"
+          style="width:40px !important; background:transparent !important; border:none !important;
+                color:inherit !important; font-family:var(--font-display) !important;
+                font-size:16px !important; text-align:center !important;" />
+        <span class="count">{{cypherCount}} / {{system.equipment.cypherLimit}} carried</span>
+      </div>
+
+      {{#each items}}
+        {{#if (eq type "cypher")}}
+        <div class="ability-item {{#if (gt @../cypherCount @../system.equipment.cypherLimit)}}over-limit{{/if}}" data-item-id="{{id}}">
+          <div class="ability-header">
+            <div class="ability-name">{{name}}</div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              {{#if system.level}}
+              <div class="ability-cost">Level {{system.level}}</div>
+              {{/if}}
+              <div class="ability-item-controls">
+                <button type="button" class="cypher-edit" data-item-id="{{_id}}" title="Edit">✎</button>
+                <button type="button" class="cypher-delete" data-item-id="{{_id}}" title="Delete">🗑</button>
+              </div>
+            </div>
+          </div>
+          {{#if system.form}}
+          <div style="font-size:12px; color:var(--text-dim); font-style:italic; margin-bottom:4px;">
+            {{system.form}}
+          </div>
+          {{/if}}
+          <div class="ability-desc">{{system.description}}</div>
+        </div>
+        {{/if}}
+      {{/each}}
+
+      {{!-- Add cypher form --}}
+      <div class="add-ability-form card">
+        <div class="section-title">Add Cypher</div>
+
+        <div class="ability-form-row">
+          <div class="ability-form-field" style="flex:2;">
+            <label>Name</label>
+            <input type="text" id="new-cypher-name" placeholder="Cypher name..." />
+          </div>
+          <div class="ability-form-field" style="flex:1;">
+            <label>Level</label>
+            <input type="number" id="new-cypher-level" placeholder="1" min="1" max="10" style="width:100%;" />
+          </div>
+        </div>
+
+        <div class="ability-form-field" style="margin-top:8px;">
+          <label>Physical Form</label>
+          <input type="text" id="new-cypher-form" placeholder="e.g. strange root, glass vial..." />
+        </div>
+
+        <div class="ability-form-field" style="margin-top:8px;">
+          <label>Effect</label>
+          <textarea id="new-cypher-desc" placeholder="What does it do?"></textarea>
+        </div>
+
+        <button type="button" class="btn-add-cypher">+ Add Cypher</button>
+      </div>
+
+    </div>

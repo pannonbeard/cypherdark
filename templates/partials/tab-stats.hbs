@@ -1,0 +1,117 @@
+{{!-- ── Stats ── --}}
+    <div class="tab" data-tab="stats" data-group="primary">
+
+      <div class="tier-row">
+        <span class="tier-label">✦ Tier</span>
+        <input type="number" name="system.basic.tier" value="{{actor.system.basic.tier}}" min="1" max="6" />
+        <span class="tier-label" style="margin-left:12px;">Effort</span>
+        <input type="number" name="system.basic.effort" value="{{actor.system.basic.effort}}" min="1" max="6"
+          style="width:44px !important; color:var(--text) !important;" />
+      </div>
+
+      <div class="pools-grid">
+
+        <div class="pool-block might">
+          <div class="pool-label">Might</div>
+          <div class="pool-current">
+            <input type="number" name="system.pools.might.value" value="{{actor.system.pools.might.value}}" min="0" />
+          </div>
+          <div class="pool-meta">
+            <div class="pool-meta-field">
+              <span>Max</span>
+              <input type="number" name="system.pools.might.max" value="{{actor.system.pools.might.max}}" min="1" />
+            </div>
+            <div class="pool-meta-field">
+              <span>Edge</span>
+              <input type="number" name="system.pools.might.edge" value="{{actor.system.pools.might.edge}}" min="0" max="6" />
+            </div>
+          </div>
+        </div>
+
+        <div class="pool-block speed">
+          <div class="pool-label">Speed</div>
+          <div class="pool-current">
+            <input type="number" name="system.pools.speed.value" value="{{actor.system.pools.speed.value}}" min="0" />
+          </div>
+          <div class="pool-meta">
+            <div class="pool-meta-field">
+              <span>Max</span>
+              <input type="number" name="system.pools.speed.max" value="{{actor.system.pools.speed.max}}" min="1" />
+            </div>
+            <div class="pool-meta-field">
+              <span>Edge</span>
+              <input type="number" name="system.pools.speed.edge" value="{{actor.system.pools.speed.edge}}" min="0" max="6" />
+            </div>
+          </div>
+        </div>
+
+        <div class="pool-block intel">
+          <div class="pool-label">Intellect</div>
+          <div class="pool-current">
+            <input type="number" name="system.pools.intellect.value" value="{{actor.system.pools.intellect.value}}" min="0" />
+          </div>
+          <div class="pool-meta">
+            <div class="pool-meta-field">
+              <span>Max</span>
+              <input type="number" name="system.pools.intellect.max" value="{{actor.system.pools.intellect.max}}" min="1" />
+            </div>
+            <div class="pool-meta-field">
+              <span>Edge</span>
+              <input type="number" name="system.pools.intellect.edge" value="{{actor.system.pools.intellect.edge}}" min="0" max="6" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-title">Experience Points</div>
+      <div class="xp-section">
+        <div class="xp-track">
+          {{#times 12}}
+            <div class="xp-pip {{#if (lte index (sub ../actor.system.basic.xp 1))}}filled{{/if}}"
+              data-pip="{{index}}">
+            </div>
+          {{/times}}
+        </div>
+        <span style="font-size:13px; color:var(--text-dim);">
+          <input type="number" name="system.basic.xp" value="{{actor.system.basic.xp}}"
+            min="0" max="12" style="width:36px !important; display:inline-block !important;" />
+          / 12 XP
+        </span>
+      </div>
+
+      <div class="section-title">Recovery Rolls</div>
+      <div class="recovery-list">
+        <label class="recovery-item {{#if actor.system.combat.recoveries.oneAction}}used{{/if}}">
+          <input type="checkbox" name="system.combat.recoveries.oneAction"
+            {{#if actor.system.combat.recoveries.oneAction}}checked{{/if}} />
+          1 Action
+        </label>
+        <label class="recovery-item {{#if actor.system.combat.recoveries.tenMinutes}}used{{/if}}">
+          <input type="checkbox" name="system.combat.recoveries.tenMinutes"
+            {{#if actor.system.combat.recoveries.tenMinutes}}checked{{/if}} />
+          10 Minutes
+        </label>
+        <label class="recovery-item {{#if actor.system.combat.recoveries.oneHour}}used{{/if}}">
+          <input type="checkbox" name="system.combat.recoveries.oneHour"
+            {{#if actor.system.combat.recoveries.oneHour}}checked{{/if}} />
+          1 Hour
+        </label>
+        <label class="recovery-item {{#if actor.system.combat.recoveries.tenHours}}used{{/if}}">
+          <input type="checkbox" name="system.combat.recoveries.tenHours"
+            {{#if actor.system.combat.recoveries.tenHours}}checked{{/if}} />
+          10 Hours
+        </label>
+      </div>
+
+      <div class="section-title">Damage Track</div>
+      <div class="status-row">
+        {{#each damageStates}}
+        <div class="status-badge {{#if (eq ../actor.system.combat.damageTrack.state this)}}active{{/if}}"
+          data-state="{{this}}">
+          {{this}}
+        </div>
+        {{/each}}
+      </div>
+
+    </div>

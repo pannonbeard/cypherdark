@@ -239,6 +239,57 @@ Hooks.once("ready", () => {
         if (confirmed) await item.delete();
       });
 
+      // ── Cypher: Add ────────────────────────────────────────────────────────
+      html.find(".btn-add-cypher").click(async () => {
+        const name  = html.find("#new-cypher-name").val().trim();
+        const level = html.find("#new-cypher-level").val().trim();
+        const form  = html.find("#new-cypher-form").val().trim();
+        const desc  = html.find("#new-cypher-desc").val().trim();
+
+        if (!name) {
+          html.find("#new-cypher-name").css("border-color", "var(--might)");
+          setTimeout(() => html.find("#new-cypher-name").css("border-color", ""), 1200);
+          return;
+        }
+
+        await this.actor.createEmbeddedDocuments("Item", [{
+          name,
+          type: "cypher",
+          system: {
+            level:       level ? Number(level) : null,
+            form:        form,
+            description: desc,
+          }
+        }]);
+
+        // Clear the form
+        html.find("#new-cypher-name").val("");
+        html.find("#new-cypher-level").val("");
+        html.find("#new-cypher-form").val("");
+        html.find("#new-cypher-desc").val("");
+      });
+
+      // ── Cypher: Edit ───────────────────────────────────────────────────────
+      html.find(".cypher-edit").click(ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (item) item.sheet.render(true);
+      });
+
+      // ── Cypher: Delete ─────────────────────────────────────────────────────
+      html.find(".cypher-delete").click(async ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (!item) return;
+
+        const confirmed = await Dialog.confirm({
+          title: "Delete Cypher",
+          content: `<p>Delete <strong>${item.name}</strong>? This cannot be undone.</p>`,
+        });
+
+        if (confirmed) await item.delete();
+      });
+
       console.log(this.actor)
     }
 

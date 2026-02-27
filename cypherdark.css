@@ -30,6 +30,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 /* ── Scrollbar ── */
@@ -712,6 +714,32 @@
 }
 
 .cypherdark .btn-add-ability:hover {
+  background: rgba(201,162,39,0.1);
+  border-color: var(--gold);
+}
+
+.cypherdark .ability-item.over-limit {
+  border-color: var(--might-dim);
+  background: rgba(74,21,16,0.2);
+}
+
+.cypherdark .btn-add-cypher {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.cypherdark .btn-add-cypher:hover {
   background: rgba(201,162,39,0.1);
   border-color: var(--gold);
 }

@@ -187,6 +187,58 @@ Hooks.once("ready", () => {
         if (confirmed) await item.delete();
       });
 
+      // ── Ability: Add ───────────────────────────────────────────────────────
+      html.find(".btn-add-ability").click(async () => {
+        const name    = html.find("#new-ability-name").val().trim();
+        const cost    = html.find("#new-ability-cost").val().trim();
+        const pool    = html.find("#new-ability-pool").val();
+        const desc    = html.find("#new-ability-desc").val().trim();
+
+        if (!name) {
+          // Flash the name field if empty
+          html.find("#new-ability-name").css("border-color", "var(--might)");
+          setTimeout(() => html.find("#new-ability-name").css("border-color", ""), 1200);
+          return;
+        }
+
+        await this.actor.createEmbeddedDocuments("Item", [{
+          name,
+          type: "ability",
+          system: {
+            costPoints:  cost ? Number(cost) : 0,
+            costPool:    pool ?? "",
+            description: desc,
+          }
+        }]);
+
+        // Clear the form
+        html.find("#new-ability-name").val("");
+        html.find("#new-ability-cost").val("");
+        html.find("#new-ability-pool").val("");
+        html.find("#new-ability-desc").val("");
+      });
+
+      // ── Ability: Edit (opens Foundry's built-in item sheet) ────────────────
+      html.find(".ability-edit").click(ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (item) item.sheet.render(true);
+      });
+
+      // ── Ability: Delete ────────────────────────────────────────────────────
+      html.find(".item-delete-ability").click(async ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (!item) return;
+
+        const confirmed = await Dialog.confirm({
+          title: "Delete Ability",
+          content: `<p>Delete <strong>${item.name}</strong>? This cannot be undone.</p>`,
+        });
+
+        if (confirmed) await item.delete();
+      });
+
       console.log(this.actor)
     }
 

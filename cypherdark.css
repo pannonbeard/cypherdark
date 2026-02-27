@@ -636,3 +636,82 @@
   background: rgba(201,162,39,0.1);
   border-color: var(--gold);
 }
+
+.cypherdark .ability-item-controls {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.cypherdark .ability-item-controls button {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 2px 6px;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+
+.cypherdark .ability-item-controls button:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
+.cypherdark .ability-item-controls .item-delete-ability:hover {
+  border-color: var(--might);
+  color: var(--might);
+}
+
+.cypherdark .add-ability-form {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  position: relative;
+}
+
+.cypherdark .add-ability-form::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.cypherdark .ability-form-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.cypherdark .ability-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cypherdark .btn-add-ability {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.cypherdark .btn-add-ability:hover {
+  background: rgba(201,162,39,0.1);
+  border-color: var(--gold);
+}

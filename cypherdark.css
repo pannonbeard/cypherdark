@@ -489,6 +489,7 @@
   font-family: var(--font-display);
   font-size: 13px;
   color: var(--gold);
+  margin-right: 15px;
 }
 
 .cypherdark .ability-cost {

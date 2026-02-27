@@ -2,7 +2,7 @@
     <div class="tab" data-tab="abilities" data-group="primary">
       {{#each items}}
         {{#if (eq type "ability")}}
-        <div class="ability-item" data-item-id="{{id}}">
+        <div class="ability-item" data-item-id="{{_id}}">
           <div class="ability-header">
             <div class="ability-name">{{name}}</div>
             {{#if system.costPoints}}

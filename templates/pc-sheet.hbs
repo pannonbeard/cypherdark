@@ -8,8 +8,7 @@
         <input class="char-name" type="text" name="name" value="{{actor.name}}" />
         <div class="char-subtitle">
           {{~#if actor.system.basic.descriptor~}}{{actor.system.basic.descriptor}} {{~/if~}}
-          {{~#if actor.system.basic.type~}}{{actor.system.basic.type}}{{~/if~}}
-          {{~#if actor.system.basic.typeIdentifier}} — {{actor.system.basic.typeIdentifier}}{{/if~}}
+          {{~#if actor.system.basic.typeIdentifier}} {{actor.system.basic.typeIdentifier}}{{/if~}} {{~#if actor.system.basic.type~}}({{actor.system.basic.type}}){{~/if~}} 
           {{~#if actor.system.basic.focus}} who {{actor.system.basic.focus}}{{/if~}}
         </div>
       </div>

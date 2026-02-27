@@ -102,8 +102,10 @@ Hooks.once("ready", () => {
       html.find("input, select, textarea").on("change", ev => {
         const el = ev.currentTarget;
         const field = el.name;
+        console.log('loading field')
         if (!field) return; // skip elements with no name attribute
 
+        console.log('loading value')
         let value;
         if (el.type === "checkbox") {
           value = el.checked;
@@ -112,9 +114,13 @@ Hooks.once("ready", () => {
         } else {
           value = el.value;
         }
+        console.log(`${field}: ${value}`)
+        console.log(this.actor)
 
         this.actor.update({ [field]: value });
       });
+
+      console.log('loaded cypherdark things')
     }
 
     async _updateObject(event, formData) {

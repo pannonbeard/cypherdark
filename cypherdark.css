@@ -630,7 +630,6 @@
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .cypherdark .btn-add-skill:hover {

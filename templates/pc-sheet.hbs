@@ -23,13 +23,7 @@
       <div class="meta-pill">
         TYPE
         <select name="system.basic.type">
-          <option value="">—</option>
-          {{#select system.basic.type}}
-            <option value="Protector">Protector</option>
-            <option value="Sage">Sage</option>
-            <option value="Explorer">Explorer</option>
-            <option value="Speaker">Speaker</option>
-          {{/select}}
+          {{selectOptions typeChoices selected=system.basic.type blank="—"}}
         </select>
       </div>
       <div class="meta-pill">

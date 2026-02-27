@@ -30,6 +30,10 @@ Hooks.once("init", () => {
   Handlebars.registerHelper("neq", function(a, b) {
     return a !== b;
   });
+
+  Handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context, null, 2); // null, 2 for pretty printing
+  });
 })
 
 

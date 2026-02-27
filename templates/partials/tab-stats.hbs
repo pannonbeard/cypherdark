@@ -14,18 +14,19 @@
         <div class="pool-block might">
           <div class="pool-label">Might</div>
           <div class="pool-current">
-            <input type="number" name="system.pools.might.value" value="{{actor.system.pools.might.value}}" min="0" />
+            <input type="number" name="system.pools.might.value" value="{{system.pools.might.value}}" min="0" />
           </div>
           <div class="pool-meta">
             <div class="pool-meta-field">
               <span>Max</span>
-              <input type="number" name="system.pools.might.max" value="{{actor.system.pools.might.max}}" min="1" />
+              <input type="number" name="system.pools.might.max" value="{{system.pools.might.max}}" min="1" />
             </div>
             <div class="pool-meta-field">
               <span>Edge</span>
-              <input type="number" name="system.pools.might.edge" value="{{actor.system.pools.might.edge}}" min="0" max="6" />
+              <input type="number" name="system.pools.might.edge" value="{{system.pools.might.edge}}" min="0" max="6" />
             </div>
           </div>
+          <button type="button" class="pool-roll-btn roll-btn" data-pool="Might" title="Roll Might">⚂ Roll</button>
         </div>
 
         <div class="pool-block speed">
@@ -43,6 +44,7 @@
               <input type="number" name="system.pools.speed.edge" value="{{actor.system.pools.speed.edge}}" min="0" max="6" />
             </div>
           </div>
+          <button type="button" class="pool-roll-btn roll-btn" data-pool="Speed" title="Roll Speed">⚂ Roll</button>
         </div>
 
         <div class="pool-block intel">
@@ -60,6 +62,7 @@
               <input type="number" name="system.pools.intellect.edge" value="{{actor.system.pools.intellect.edge}}" min="0" max="6" />
             </div>
           </div>
+          <button type="button" class="pool-roll-btn roll-btn" data-pool="Intellect" title="Roll Intellect">⚂ Roll</button>
         </div>
 
       </div>
@@ -81,6 +84,12 @@
       </div>
 
       <div class="section-title">Recovery Rolls</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+        <span style="font-size:13px; color:var(--text-dim); font-style:italic;">
+          Roll: {{system.combat.recoveries.roll}}
+        </span>
+        <button type="button" class="recovery-roll-btn roll-btn">⚂ Roll Recovery</button>
+      </div>
       <div class="recovery-list">
         <label class="recovery-item {{#if actor.system.combat.recoveries.oneAction}}used{{/if}}">
           <input type="checkbox" name="system.combat.recoveries.oneAction"

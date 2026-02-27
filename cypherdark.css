@@ -918,3 +918,32 @@
 .cypherdark-item .item-editor p { margin: 0 0 6px; }
 .cypherdark-item .item-editor strong { color: var(--gold); }
 .cypherdark-item .item-editor em { color: var(--text-dim); }
+
+/* ── Roll buttons ── */
+.cypherdark .roll-btn {
+  background: transparent;
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 7px;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+
+.cypherdark .roll-btn:hover {
+  background: rgba(201,162,39,0.15);
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(201,162,39,0.2);
+}
+
+.cypherdark .pool-roll-btn {
+  width: 100%;
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 0;
+}

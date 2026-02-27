@@ -361,6 +361,58 @@ Hooks.once("ready", () => {
         if (confirmed) await item.delete();
       });
 
+      // ── Helper: fire the system's item roll ───────────────────────────────
+      const itemRoll = async (itemId) => {
+        const item = this.actor.items.get(itemId);
+        if (!item) return;
+        await game.cyphersystem.itemRollMacro(
+          this.actor,  // actor object — not UUID
+          itemId,      // item ID — not UUID
+          // remaining params left undefined so the function
+          // reads defaults from item.system.settings.rollButton
+        );
+      };
+
+      // ── Helper: open roll engine form for pool rolls ───────────────────────
+      const poolRoll = async (pool) => {
+        await game.cyphersystem.rollEngineForm({
+          actorUuid: this.actor.uuid,
+          pool: pool,
+          title: `${this.actor.name}: ${pool} Roll`,
+        });
+      };
+
+      // ── Skill roll ────────────────────────────────────────────────────────
+      html.find(".skill-roll").click(async ev => {
+        ev.preventDefault();
+        await itemRoll(ev.currentTarget.dataset.itemId);
+      });
+
+      // ── Ability roll ──────────────────────────────────────────────────────
+      html.find(".ability-roll").click(async ev => {
+        ev.preventDefault();
+        await itemRoll(ev.currentTarget.dataset.itemId);
+      });
+
+      // ── Attack roll ───────────────────────────────────────────────────────
+      html.find(".attack-roll").click(async ev => {
+        ev.preventDefault();
+        await itemRoll(ev.currentTarget.dataset.itemId);
+      });
+
+      // ── Pool roll ─────────────────────────────────────────────────────────
+      html.find(".pool-roll-btn").click(async ev => {
+        ev.preventDefault();
+        const pool = ev.currentTarget.dataset.pool;
+        await poolRoll(pool);
+      });
+
+      // ── Recovery roll ─────────────────────────────────────────────────────
+      html.find(".recovery-roll-btn").click(async ev => {
+        ev.preventDefault();
+        await game.cyphersystem.recoveryRollMacro(this.actor.uuid);
+      });
+
       // ── Re-render when any owned item is updated via its own sheet ──────────
       this._itemUpdateHook = Hooks.on("updateItem", (item, changes, options, userId) => {
         if (item.parent?.id === this.actor.id) {

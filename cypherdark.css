@@ -743,3 +743,24 @@
   background: rgba(201,162,39,0.1);
   border-color: var(--gold);
 }
+
+.cypherdark .btn-add-equipment {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--gold);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.cypherdark .btn-add-equipment:hover {
+  background: rgba(201,162,39,0.1);
+  border-color: var(--gold);
+}

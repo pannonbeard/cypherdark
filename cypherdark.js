@@ -290,6 +290,54 @@ Hooks.once("ready", () => {
         if (confirmed) await item.delete();
       });
 
+      // ── Equipment: Add ─────────────────────────────────────────────────────
+      html.find(".btn-add-equipment").click(async () => {
+        const name = html.find("#new-equipment-name").val().trim();
+        const qty  = html.find("#new-equipment-qty").val().trim();
+        const desc = html.find("#new-equipment-desc").val().trim();
+
+        if (!name) {
+          html.find("#new-equipment-name").css("border-color", "var(--might)");
+          setTimeout(() => html.find("#new-equipment-name").css("border-color", ""), 1200);
+          return;
+        }
+
+        await this.actor.createEmbeddedDocuments("Item", [{
+          name,
+          type: "equipment",
+          system: {
+            quantity:    qty ? Number(qty) : 1,
+            description: desc,
+          }
+        }]);
+
+        // Clear the form
+        html.find("#new-equipment-name").val("");
+        html.find("#new-equipment-qty").val("");
+        html.find("#new-equipment-desc").val("");
+      });
+
+      // ── Equipment: Edit ────────────────────────────────────────────────────
+      html.find(".equipment-edit").click(ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (item) item.sheet.render(true);
+      });
+
+      // ── Equipment: Delete ──────────────────────────────────────────────────
+      html.find(".equipment-delete").click(async ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (!item) return;
+
+        const confirmed = await Dialog.confirm({
+          title: "Delete Equipment",
+          content: `<p>Delete <strong>${item.name}</strong>? This cannot be undone.</p>`,
+        });
+
+        if (confirmed) await item.delete();
+      });
+
       console.log(this.actor)
     }
 

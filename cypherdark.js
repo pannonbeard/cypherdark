@@ -67,6 +67,14 @@ Hooks.once("ready", () => {
       context.cypherCount = (context.items ?? []).filter(i => i.type === "cypher").length;
       // Pass damage track states so the template can render them as buttons
       context.damageStates = ["Hale", "Impaired", "Debilitated", "Dead"];
+      // Type choices for the select dropdown
+      context.typeChoices = {
+        "Protector": "Protector",
+        "Sage": "Sage",
+        "Explorer": "Explorer",
+        "Speaker": "Speaker"
+      };
+      
       return context;
     }
 

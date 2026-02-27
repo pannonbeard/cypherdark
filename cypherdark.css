@@ -947,3 +947,15 @@
   text-transform: uppercase;
   padding: 5px 0;
 }
+
+.cypherdark .d20-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  pointer-events: none;
+  filter: drop-shadow(0 0 3px rgba(201,162,39,0.4));
+}
+
+.cypherdark .roll-btn:hover .d20-icon {
+  filter: drop-shadow(0 0 6px rgba(240,192,64,0.7));
+}

@@ -36,6 +36,25 @@ Hooks.once("init", () => {
   });
 })
 
+Hooks.once("setup", async () => {
+  // Load and register partials
+  const partialNames = [
+    "header",
+    "tab-stats",
+    "tab-skills",
+    "tab-abilities",
+    "tab-cyphers",
+    "tab-equipment",
+    "tab-notes",
+  ];
+
+  for (const name of partialNames) {
+    const path = `modules/cypherdark/templates/partials/${name}.hbs`;
+    const text = await fetch(path).then(r => r.text());
+    Handlebars.registerPartial(`cypherdark-${name}`, text);
+  }
+});
+
 
 Hooks.once("ready", () => {
 

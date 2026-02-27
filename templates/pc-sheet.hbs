@@ -1,40 +1,6 @@
 <form class="cypherdark editable" autocomplete="off">
 
-  {{!-- ── Header ── --}}
-  <header class="sheet-header">
-    <div class="header-top">
-      <img class="char-avatar" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" />
-      <div class="header-fields">
-        <input class="char-name" type="text" name="name" value="{{actor.name}}" />
-        <div class="char-subtitle">
-          {{~#if actor.system.basic.descriptor~}}{{actor.system.basic.descriptor}} {{~/if~}}
-          {{~#if actor.system.basic.typeIdentifier}} {{actor.system.basic.typeIdentifier}}{{/if~}} {{~#if actor.system.basic.type~}}({{actor.system.basic.type}}){{~/if~}} 
-          {{~#if actor.system.basic.focus}} who {{actor.system.basic.focus}}{{/if~}}
-        </div>
-      </div>
-    </div>
-
-    <div class="header-meta">
-      <div class="meta-pill">
-        DESCRIPTOR
-        <input type="text" name="system.basic.descriptor" value="{{actor.system.basic.descriptor}}" placeholder="—" style="width:100px;" />
-      </div>
-      <div class="meta-pill">
-        TYPE
-        <select name="system.basic.type">
-          {{selectOptions typeChoices selected=actor.system.basic.type blank="—"}}
-        </select>
-      </div>
-      <div class="meta-pill">
-        IDENTIFIER
-        <input type="text" name="system.basic.typeIdentifier" value="{{actor.system.basic.typeIdentifier}}" placeholder="e.g. Root Worker" style="width:110px;" />
-      </div>
-      <div class="meta-pill">
-        FOCUS
-        <input type="text" name="system.basic.focus" value="{{actor.system.basic.focus}}" placeholder="—" style="width:130px;" />
-      </div>
-    </div>
-  </header>
+  {{> cypherdark-header}}
 
   {{!-- ── Tabs ── --}}
   <nav class="sheet-tabs tabs" data-group="primary">

@@ -375,10 +375,23 @@ Hooks.once("ready", () => {
 
       // ── Helper: open roll engine form for pool rolls ───────────────────────
       const poolRoll = async (pool) => {
-        await game.cyphersystem.rollEngineForm({
+        await game.cyphersystem.rollEngineMain({
           actorUuid: this.actor.uuid,
           pool: pool,
-          title: `${this.actor.name}: ${pool} Roll`,
+          title: `${pool} Roll`,
+          skipRoll: false,   // false = actually roll, don't just open the form
+          skillLevel: "Practiced",
+          assets: 0,
+          effortToEase: 0,
+          effortOtherUses: 0,
+          damage: 0,
+          effortDamage: 0,
+          damagePerLOE: 3,
+          difficultyModifier: 0,
+          easedOrHindered: "eased",
+          bonus: 0,
+          poolPointCost: 0,
+          freeEffort: 0,
         });
       };
 
@@ -410,7 +423,7 @@ Hooks.once("ready", () => {
       // ── Recovery roll ─────────────────────────────────────────────────────
       html.find(".recovery-roll-btn").click(async ev => {
         ev.preventDefault();
-        await game.cyphersystem.recoveryRollMacro(this.actor.uuid);
+        await game.cyphersystem.recoveryRollMacro(ev.currentTarget.dataset.userId);
       });
 
       // ── Re-render when any owned item is updated via its own sheet ──────────

@@ -88,7 +88,7 @@
         <span style="font-size:13px; color:var(--text-dim); font-style:italic;">
           Roll: {{system.combat.recoveries.roll}}
         </span>
-        <button type="button" class="recovery-roll-btn roll-btn">⚂ Roll Recovery</button>
+        <button type="button" class="recovery-roll-btn roll-btn" title="Roll Recovery" data-user-id="{{ actor.uuid }}">⚂ Roll Recovery</button>
       </div>
       <div class="recovery-list">
         <label class="recovery-item {{#if actor.system.combat.recoveries.oneAction}}used{{/if}}">

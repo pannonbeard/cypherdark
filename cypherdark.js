@@ -170,6 +170,7 @@ Hooks.once("ready", () => {
       // ── Skill: Delete ──────────────────────────────────────────────────────
       html.find(".item-delete").click(async ev => {
         const id = ev.currentTarget.dataset.itemId;
+        console.log('item Id:', id)
         const item = this.actor.items.get(id);
         if (!item) return;
 

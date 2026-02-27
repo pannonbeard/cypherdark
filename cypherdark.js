@@ -120,8 +120,70 @@ Hooks.once("ready", () => {
         this.actor.update({ [field]: value });
       });
 
-      console.log('loaded cypherdark things')
+      // ── Skill: Add ─────────────────────────────────────────────────────────
+      html.find(".btn-add-skill").click(async () => {
+        const input = html.find("#new-skill-name");
+        const name = input.val().trim();
+        if (!name) return;
+
+        await this.actor.createEmbeddedDocuments("Item", [{
+          name,
+          type: "skill",
+          system: { skillLevel: "Trained" }
+        }]);
+
+        input.val("");
+      });
+
+      // Allow pressing Enter in the input to add the skill
+      html.find("#new-skill-name").keydown(async ev => {
+        if (ev.key !== "Enter") return;
+        ev.preventDefault();
+        html.find(".btn-add-skill").trigger("click");
+      });
+
+      // ── Skill: Cycle level ─────────────────────────────────────────────────
+      // Trained → Specialized → Unskilled → Trained
+      html.find(".skill-cycle").click(async ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (!item) return;
+
+        const levels = ["Unskilled", "Trained", "Specialized"];
+        const current = item.system.skillLevel ?? "Trained";
+        const next = levels[(levels.indexOf(current) + 1) % levels.length];
+        await item.update({ "system.skillLevel": next });
+      });
+
+      // ── Skill: Toggle inability ────────────────────────────────────────────
+      html.find(".skill-inability").click(async ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (!item) return;
+
+        const isInability = item.system.skillLevel === "Inability";
+        await item.update({
+          "system.skillLevel": isInability ? "Trained" : "Inability"
+        });
+      });
+
+      // ── Skill: Delete ──────────────────────────────────────────────────────
+      html.find(".item-delete").click(async ev => {
+        const id = ev.currentTarget.dataset.itemId;
+        const item = this.actor.items.get(id);
+        if (!item) return;
+
+        // Show a confirmation dialog before deleting
+        const confirmed = await Dialog.confirm({
+          title: "Delete Skill",
+          content: `<p>Delete <strong>${item.name}</strong>? This cannot be undone.</p>`,
+        });
+
+        if (confirmed) await item.delete();
+      });
     }
+
+
 
     async _updateObject(event, formData) {
       const expanded = foundry.utils.expandObject(formData);

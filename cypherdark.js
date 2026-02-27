@@ -136,6 +136,6 @@ Hooks.once("ready", () => {
     label: "Cypher Dark (OGoA)"
   });
 
-  Actors.unregisterSheet("cyphersystem", baseClass, { types: ["pc"] });
+  // Actors.unregisterSheet("cyphersystem", baseClass, { types: ["pc"] });
 
 });

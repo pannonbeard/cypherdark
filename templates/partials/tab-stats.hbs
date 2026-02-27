@@ -26,7 +26,7 @@
               <input type="number" name="system.pools.might.edge" value="{{actor.system.pools.might.edge}}" min="0" max="6" />
             </div>
           </div>
-          <button type="button" class="pool-roll-btn roll-btn" data-pool="Might" title="Roll Might">⚂ Roll</button>
+          <button type="button" class="pool-roll-btn roll-btn" data-pool="Might" title="Roll Might"><img src="modules/cypherdark/assets/d20.svg" class="d20-icon" /> Roll</button>
         </div>
 
         <div class="pool-block speed">
@@ -44,7 +44,7 @@
               <input type="number" name="system.pools.speed.edge" value="{{actor.system.pools.speed.edge}}" min="0" max="6" />
             </div>
           </div>
-          <button type="button" class="pool-roll-btn roll-btn" data-pool="Speed" title="Roll Speed">⚂ Roll</button>
+          <button type="button" class="pool-roll-btn roll-btn" data-pool="Speed" title="Roll Speed"><img src="modules/cypherdark/assets/d20.svg" class="d20-icon" /> Roll</button>
         </div>
 
         <div class="pool-block intel">
@@ -62,7 +62,7 @@
               <input type="number" name="system.pools.intellect.edge" value="{{actor.system.pools.intellect.edge}}" min="0" max="6" />
             </div>
           </div>
-          <button type="button" class="pool-roll-btn roll-btn" data-pool="Intellect" title="Roll Intellect">⚂ Roll</button>
+          <button type="button" class="pool-roll-btn roll-btn" data-pool="Intellect" title="Roll Intellect"><img src="modules/cypherdark/assets/d20.svg" class="d20-icon" /> Roll</button>
         </div>
 
       </div>
@@ -88,7 +88,7 @@
         <span style="font-size:13px; color:var(--text-dim); font-style:italic;">
           Roll: {{system.combat.recoveries.roll}}
         </span>
-        <button type="button" class="recovery-roll-btn roll-btn" title="Roll Recovery" data-user-id="{{ actor.uuid }}">⚂ Roll Recovery</button>
+        <button type="button" class="recovery-roll-btn roll-btn" title="Roll Recovery" data-user-id="{{ actor.uuid }}"><img src="modules/cypherdark/assets/d20.svg" class="d20-icon" /> Roll Recovery</button>
       </div>
       <div class="recovery-list">
         <label class="recovery-item {{#if actor.system.combat.recoveries.oneAction}}used{{/if}}">

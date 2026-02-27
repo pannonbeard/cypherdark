@@ -338,10 +338,32 @@ Hooks.once("ready", () => {
         if (confirmed) await item.delete();
       });
 
-      console.log(this.actor)
+      // ── Re-render when any owned item is updated via its own sheet ──────────
+      this._itemUpdateHook = Hooks.on("updateItem", (item, changes, options, userId) => {
+        if (item.parent?.id === this.actor.id) {
+          this.render(false);
+        }
+      });
+
+      this._itemDeleteHook = Hooks.on("deleteItem", (item, options, userId) => {
+        if (item.parent?.id === this.actor.id) {
+          this.render(false);
+        }
+      });
+
+      this._itemCreateHook = Hooks.on("createItem", (item, options, userId) => {
+        if (item.parent?.id === this.actor.id) {
+          this.render(false);
+        }
+      });
     }
 
-
+    async close(options) {
+      Hooks.off("updateItem", this._itemUpdateHook);
+      Hooks.off("deleteItem", this._itemDeleteHook);
+      Hooks.off("createItem", this._itemCreateHook);
+      return super.close(options);
+    }
 
     async _updateObject(event, formData) {
       const expanded = foundry.utils.expandObject(formData);
